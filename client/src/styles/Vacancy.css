@@ -1,0 +1,27 @@
+.vacancy{
+  width: 100%;
+  /* height: 15vh; */
+  color: rgb(0, 0, 0);
+  background-color: rgb(249, 255, 255);
+  box-shadow: -5px 5px 15px rgb(255, 255, 255) inset;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.vacancy-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid green; */
+
+}
+
+
+
+.vacancy-bottom-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

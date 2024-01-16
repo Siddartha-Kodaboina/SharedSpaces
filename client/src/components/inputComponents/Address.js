@@ -10,10 +10,12 @@ const Address = ({setCityAddress}) => {
         const delayDebounce = setTimeout(async() => {
             if (typing && inputValue.length >= 3) {
                 // Fetch suggestions
-                await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputValue)}&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}&limit=20&filter[countrycode]=us`)
+                // https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputValue)}&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}&limit=20&filter[countrycode]=us
+                
+                await fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(inputValue)}&types=establishment&components=country:us&key=${process.env.REACT_APP_FIREBASE_API_KEY}`)
                     .then(response => response.json())
-                    .then(data => setSuggestions(data.features));
-                // console.log(suggestions)
+                    .then(data => setSuggestions(data.predictions));
+                console.log("Address suggestions", suggestions)
             } else {
                 setSuggestions([]);
             }
@@ -46,8 +48,8 @@ const Address = ({setCityAddress}) => {
             {suggestions.length > 0 && (
                 <div style={{ maxHeight: '200px', overflowY: 'scroll' }}>
                     {suggestions.map(suggestion => (
-                        <div key={suggestion.properties.place_id} onClick={() => handleSelect(suggestion)}>
-                            {suggestion.properties.formatted}
+                        <div key={suggestion.place_id} onClick={() => handleSelect(suggestion)}>
+                            {suggestion.description}
                         </div>
                     ))}
                     {console.log(suggestions)}

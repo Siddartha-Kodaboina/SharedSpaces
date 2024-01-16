@@ -1,0 +1,408 @@
+.main{
+  width: 100%;
+  /* min-height: 100vh; */
+  margin-top: 0vh;
+  /* border: 1px solid red; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.main-inner{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  /* border: 1px solid red; */
+}
+
+.community{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  /* min-height: 100vh; */
+  margin: 0px 0px 10px 0px;
+  flex-wrap: nowrap;
+}
+
+.community-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width:50%;
+  /* min-height: 100vh; */
+  /* border: 2px solid green; */
+  margin: 0px 10px 0px 0px;
+}
+
+.title p{
+  padding: 0;
+  margin: 0;
+}
+
+.title{
+  /* border: 1px solid black; */
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  padding: 20px 0px 20px 0px;
+}
+
+.name-address{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content:first baseline;
+  /* padding: 10px 0px; */
+  /* border: 1px solid red; */
+}
+
+.name{
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.address{
+  color: rgba(60, 60, 60, 0.788);
+}
+
+.name-address-row-2{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(18, 147, 147);
+  color: rgb(18, 147, 147);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.location-icon p{
+  /* color: rgb(18, 147, 147); */
+  /* font-size: 1px; */
+}
+
+.location-icon svg{
+  font-size: 2rem;
+}
+
+.images{
+  display: flex;
+  /* border: 1px solid yellow; */
+  padding: 20px 0px;
+}
+.image{
+  width: 100%;
+  height: 60vh;
+  background-color: azure;
+  border: 1px solid black;
+}
+
+.description{
+  /* border: 1px solid yellow; */
+  padding: 20px 0px;
+}
+
+.element-title-2{
+  color: rgb(18, 147, 147);
+}
+
+.rooms-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid yellow; */
+  padding: 20px 0px;
+}
+
+.rooms-container p{
+  font-size: 1em;
+  color: rgba(23, 23, 23, 0.8);
+}
+
+.rooms{
+  padding: 20px 0px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-gap: 20px;
+  justify-content: flex-start;
+  color: rgba(60, 60, 60, 0.788);
+}
+
+.room{
+  display: flex;
+  position: relative;
+  /* width: 45%; */
+  padding: 10px 10px 10px 10px;
+  background-color:rgba(186, 142, 195, 0.139);
+  border-radius: 10px;
+  justify-content: start;
+  /* align-items: center; */
+  flex-direction: column;
+  box-shadow: -2px 2px 2px 2px rgb(226, 226, 226);
+}
+
+.room:hover{
+  background-color:rgb(186, 142, 195);
+  color: black;
+}
+
+.amenities-container{
+  padding: 20px 0px;
+}
+
+.amenities{
+  padding: 10px 0px;
+  /* position: relative; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  grid-gap: 10px;
+  color: rgba(60, 60, 60, 0.788);
+}
+
+.amenity{
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 10px 10px 10px;
+  background-color: rgba(158, 227, 227, 0.427);
+  box-shadow: 1px 1px 5px 2px rgb(226, 226, 226);
+  border-radius: 10px;
+  
+}
+
+.amenity:hover{
+  background-color: rgb(158, 227, 227);
+  color: black;
+}
+
+.amenity p{
+  padding-left: 10px;
+}
+
+.universities-container{
+  padding: 20px 0px;
+}
+
+.universities{
+  padding: 10px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  color: rgba(60, 60, 60, 0.788);
+}
+
+.university{
+  padding: 10px;
+  background-color: rgba(244, 192, 192, 0.485);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 2px rgb(226, 226, 226);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.university:hover{
+  background-color: rgb(244, 192, 192);
+  color: black;
+}
+
+.active-room{
+  display: flex;
+  width: 47%;
+  /* padding: 20px 0px; */
+  height: calc(90vh);
+  position: sticky;
+  top: 5vh;
+  align-self: flex-start; 
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 1px 1px 5px 2px rgb(226, 226, 226);
+  padding: 24px 40px;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+  /* top: 40px; */
+  /* jus */
+  /* height: 40%; */
+  /* border: 2px solid green; */
+}
+
+.active-room-inner{
+  width: 100%;
+  
+  /* border: 1px solid black; */
+  /* padding: 24px 40px; */
+  
+}
+
+.selection-pricing-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.selection-pricing-container-left{
+  /* padding: 24px 0px 12px 12px; */
+  border: 1px solid rgb(18, 147, 147);
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  color: rgb(18, 147, 147);
+  padding: 7px 17px;
+}
+
+.selection-pricing-container p{
+  
+  /* padding: 7px 17px; */
+  
+  padding-left: 10px;
+  /* align */
+}
+
+.selection-pricing-container-right{
+  border: 1px solid rgb(255, 255, 255);
+  background-color: black;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  padding: 7px 17px;
+}
+
+.room-type{
+  padding: 20px 0px;
+}
+
+.room-type h4, .tenant-requirements h4, .discuss-container h4{
+  font-weight:100;
+  font-size: 16px;
+  padding: 10px 0px;
+}
+
+.room-type-info{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.tenant-requirements-list{
+  /* po */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.grid-cell{
+  display: flex;
+  
+  padding: 17px 17px;
+  /* border: 1px solid red; */
+  box-shadow: 1px 1px 5px 2px rgb(226, 226, 226);
+  border-radius: 10px;
+  color: rgba(60, 60, 60, 0.788);
+  background-color: azure;
+}
+
+.tenant-requirements-list .grid-cell:nth-child(odd){
+  background-color:rgba(186, 142, 195, 0.139);
+}
+
+.tenant-requirements-list .grid-cell:nth-child(odd):hover{
+  background-color:rgb(186, 142, 195);
+  /* background-color:rgb(92, 44, 102); */
+}
+
+.tenant-requirements-list .grid-cell:nth-child(even){
+  background-color:rgba(142, 195, 146, 0.139);
+}
+
+.grid-cell p{
+  padding-left: 10px;
+}
+
+.tenant-requirements-list .grid-cell:nth-child(even):hover{
+  background-color:rgb(142, 195, 146);
+}
+
+.tenant-requirements{
+  padding-top: 0px;
+}
+
+.discuss-container {
+  padding-top: 20px;
+}
+
+.discuss-container-inner {
+  padding: 10px 0px;
+}
+
+.discuss-container-inner form textarea {
+  width: 100%;
+  height: 20vh; /* Adjust height as needed */
+  padding: 10px; /* Provide some padding inside the textarea */
+  box-sizing: border-box; /* Include padding and border in the width and height */
+  border: 1px solid #ccc; /* Example border, you can style it as you like */
+  border-radius: 4px; /* Rounded corners */
+  resize: vertical; /* Allow only vertical resizing, remove if not needed */
+  line-height: 1.5; /* Adjust line height for better readability */
+  font-size: 14px; /* Adjust font size as needed */
+}
+
+/* Remove default styling for textarea to avoid browser inconsistencies */
+.discuss-container-inner form textarea:focus {
+  outline: none;
+  border-color: rgb(18, 147, 147); /* Border color when focused */
+}
+
+/* Optional: Style for placeholder text */
+.discuss-container-inner form textarea::placeholder {
+  color: #888; /* Placeholder text color */
+  font-style: italic; /* Optional: style placeholder text as italic */
+}
+
+.room-interest{
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+
+.room-interest p{
+  font-weight:100;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: rgb(18, 147, 147);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
