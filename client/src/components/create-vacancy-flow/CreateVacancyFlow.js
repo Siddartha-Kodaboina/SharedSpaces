@@ -4,8 +4,10 @@ import NearestUniversities from './NearestUniversities';
 import IndividualOrCommunity from './IndividualOrCommunity';
 import CommunityHousing from './CommunityHousing';
 import RoomInput from './RoomInput';
+import useFirebaseUser from '../../hooks/useFirebaseUser';
 
 const CreateVacancyFlow = () => {
+    const currentUser = useFirebaseUser();
     const [pageNumber, setPageNumber] = useState(5);
     const totalPages = 5;
     const [formContent, setFormContent] = useState({
@@ -52,6 +54,7 @@ const CreateVacancyFlow = () => {
                     onPrev = {handlePreviousButton}
                     onNext={handleNextButton}
                     onPageSubmit = {onFormPageSubmit}
+                    onFormSubmit = {handleFormSubmit}
                     roomDetails = {formContent['roomDetails']}
                 />  // 5. Get the room specific details
             default:
@@ -62,7 +65,7 @@ const CreateVacancyFlow = () => {
     useEffect( () => {
         renderFormContent();
         
-    }, [pageNumber])
+    }, [pageNumber]);
 
     const onFormPageSubmit = (key, value) => {
         setFormContent({...formContent, [key]: value});
@@ -84,6 +87,31 @@ const CreateVacancyFlow = () => {
         setPageNumber(pageNumber +step);
         
     }
+
+    const handleFormSubmit = async() => {
+        try {
+            
+            const body = {
+                ...formContent,
+                user: currentUser
+            };
+            console.log(body);
+
+            const response = await fetch(`${process.env.REACT_APP_NODE_HOST_URL}:${process.env.REACT_APP_NODE_HOST_PORT}/api/vacancy-request`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body)
+            })
+            .then(response => response.json())
+            .then(response => console.log("The responce", response));
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // Handle the form submit button , call backed to the right API end-point
 
     return (
         <div className='main'>

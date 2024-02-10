@@ -28,10 +28,11 @@ const Home = ({ user }) => {
   return (
     <div className="home">
       {console.log(requests)}
-      {
+      {/* {
         requests===null? 'Loading...': 
         <VacancyContainer data={requests.content}/>
-      }
+      } */}
+      <p>You're home</p>
     </div>
   )
 }

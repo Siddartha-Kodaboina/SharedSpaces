@@ -7,14 +7,16 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {numberFieldParameters, numberFieldsInText} from './utilities';
 
-const RoomInput = ({onPrev, onNext, onPageSubmit, roomDetails }) => {
+const RoomInput = ({onPrev, onNext, onPageSubmit, onFormSubmit, roomDetails }) => {
     const [roomHousingDetails, setRoomHousingDetails] = useState(roomDetails);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
     const [selectedDo, setSelectedDo] = useState([]);
     const [selectedDont, setSelectedDont] = useState([]);
+    const [selectedTenantRequirements, setSelectedTenantRequirements] = useState([]);
     const [roomAmenities, setRoomAmenities] = useState([]);
     const [roomDo, setRoomDo] = useState([]);
     const [roomDont, setRoomDont] = useState([]);
+    const [tenantRequirements, setTenantRequirements] = useState([]);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -41,7 +43,8 @@ const RoomInput = ({onPrev, onNext, onPageSubmit, roomDetails }) => {
         const filePaths = [
           './room-amenities-options.txt',
           './room-do.txt',
-          './room-dont.txt'
+          './room-dont.txt',
+          './tenant-requirements.txt'
         ];
       
         Promise.all(filePaths.map(filePath =>
@@ -62,6 +65,7 @@ const RoomInput = ({onPrev, onNext, onPageSubmit, roomDetails }) => {
           setRoomAmenities(combinedData[0]);
           setRoomDo(combinedData[1]);
           setRoomDont(combinedData[2]);
+          setTenantRequirements(combinedData[3]);
         })
         .catch(error => {
           console.error('Error fetching the text files: ', error);
@@ -78,12 +82,15 @@ const RoomInput = ({onPrev, onNext, onPageSubmit, roomDetails }) => {
         if(selectTypeStringLabel === 'room-dont'){
             setSelectedDont(eventTargetValue);
         }
+        if(selectTypeStringLabel === 'tenant-requirements'){
+            setSelectedTenantRequirements(eventTargetValue);
+        }
         // setSelectedOptions(event.target.value);
     };
 
     const handleSubmit = (buttonName) => {
         onPageSubmit('roomDetails', roomHousingDetails);
-        buttonName === 'next' ? onNext() : onPrev();
+        buttonName === 'submit' ? onFormSubmit() : onPrev();
     };
       
     const handleDecrement = (key) => {
@@ -152,57 +159,28 @@ const RoomInput = ({onPrev, onNext, onPageSubmit, roomDetails }) => {
                     helperText={`Specify the total number of bathrooms.`}
                 />
             </Grid>
-            <Grid item xs={12} sm={6}>
-                <TextField
-                    label="Number of people living in house"
-                    type="number"
-                    name='peopleCount'
-                    value={roomHousingDetails.hasOwnProperty('peopleCount')? roomHousingDetails.peopleCount: ''}
-                    onChange={handleChange}
-                    fullWidth
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={()=>handleDecrement('peopleCount')} disabled={roomHousingDetails.peopleCount === 0}>
-                                    <RemoveIcon />
-                                </IconButton>
-                                <IconButton onClick={()=>handleIncrement('peopleCount')} disabled={roomHousingDetails.peopleCount === numberFieldParameters.peopleCount.limit}>
-                                    <AddIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
-                    InputLabelProps={{
-                        shrink: roomHousingDetails && roomHousingDetails.hasOwnProperty('peopleCount')
-                    }}
-                    helperText={`Specify the total number of people living in home.`}
-                />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                <TextField
-                    label="Number of people living in house"
-                    type="number"
-                    name='peopleCount'
-                    value={roomHousingDetails.hasOwnProperty('peopleCount')? roomHousingDetails.peopleCount: ''}
-                    onChange={handleChange}
-                    fullWidth
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={()=>handleDecrement('peopleCount')} disabled={roomHousingDetails.peopleCount === 0}>
-                                    <RemoveIcon />
-                                </IconButton>
-                                <IconButton onClick={()=>handleIncrement('peopleCount')} disabled={roomHousingDetails.peopleCount === numberFieldParameters.peopleCount.limit}>
-                                    <AddIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
-                    InputLabelProps={{
-                        shrink: roomHousingDetails && roomHousingDetails.hasOwnProperty('peopleCount')
-                    }}
-                    helperText={`Specify the total number of people living in home.`}
-                />
+            <Grid item xs={12}>
+                <FormControl fullWidth>
+                    <InputLabel id="tenant-requirements-label">Tenant Requirements</InputLabel>
+                    <Select
+                        labelId="tenant-requirements"
+                        multiple
+                        value={selectedTenantRequirements}
+                        onChange={(e)=>handleCheckboxChange(e.target.value, 'tenant-requirements')}
+                        renderValue={(selected) => selected.join(', ')}
+                        InputLabelProps={{
+                            shrink: selectedTenantRequirements.length!==0
+                        }}
+                    >
+                        {tenantRequirements.map((requirement) => (
+                            <MenuItem key={requirement.id} name={requirement.option_value} value={requirement.option_value}>
+                                <Checkbox checked={selectedTenantRequirements.includes(requirement.option_value)} />
+                                {requirement.option_value}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                    <Typography variant="caption">{`Select the Tenant's Requirements.`}</Typography>
+                </FormControl>
             </Grid>
             <Grid item xs={12} sm={4}>
                 <TextField
@@ -445,8 +423,8 @@ const RoomInput = ({onPrev, onNext, onPageSubmit, roomDetails }) => {
                 </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-                <Button fullWidth variant="contained" color="primary" onClick={() => handleSubmit('next')} disabled={true}>
-                    Next
+                <Button fullWidth variant="contained" color="primary" onClick={() => handleSubmit('submit')} >
+                    Submit
                 </Button>
             </Grid>
         </Grid>

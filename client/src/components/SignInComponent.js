@@ -24,7 +24,7 @@ const SignInComponent = () => {
 
   return (
     <div>
-        <h1>{process.env.REACT_APP_FIREBASE_API_KEY}</h1>
+        {/* <h1>{process.env.REACT_APP_FIREBASE_API_KEY}</h1> */}
         <button onClick={signInWithGoogle}>Sign in with Google</button>
     </div>
     

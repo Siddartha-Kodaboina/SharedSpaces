@@ -36,7 +36,7 @@ const UniversityDetails = ({ onPrev, onNext, onPageSubmit, formContent }) => {
       autocompleteInput.current,
       {
         componentRestrictions: { country: "us" },
-        fields: ["address_components", "name", "photos"],
+        fields: ["place_id", "address_components", "name", "photos"],
         types: ["establishment"]
       }
     );
@@ -46,7 +46,9 @@ const UniversityDetails = ({ onPrev, onNext, onPageSubmit, formContent }) => {
       let updatedUniversityDetails = {
         ...universityDetails,
         ...generateAddress(place.address_components),
-        university: place.name
+        university: place.name,
+        place_id: place.place_id,
+        photo_urls: place.photos.map((photo)=> [photo.width, photo.height, photo.getUrl()])
       }
       setUniversityDetails(updatedUniversityDetails);
     });
