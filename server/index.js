@@ -6,6 +6,7 @@ const port = process.env.NODE_SERVER_PORT;
 
 const pool = require('./db');
 const communityRouter = require('./routes/community');
+const vacancyRequestRouter = require('./routes/vacancyRequest');
 
 // middleware
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api', communityRouter);
+app.use('/api', vacancyRequestRouter);
 
 // Check database connection
 pool.query('SELECT NOW()', (err, res) => {
