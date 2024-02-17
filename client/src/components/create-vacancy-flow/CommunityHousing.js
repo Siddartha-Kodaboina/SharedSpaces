@@ -38,7 +38,7 @@ const CommunityHousing = ({ onPrev, onNext, onPageSubmit, communityDetails, hous
             autocompleteInput.current,
             {
                 componentRestrictions: { country: "us" },
-                fields: ["address_components", "name", "photos"],
+                fields: ["place_id", "address_components", "name", "photos"],
                 types:["establishment"]
             }
         );
@@ -50,7 +50,9 @@ const CommunityHousing = ({ onPrev, onNext, onPageSubmit, communityDetails, hous
             let updatedCommunityHousingDetails = {
                 ...communityHousingDetails,
                 ...generateAddress(place.address_components),
-                title: place.name
+                title: place.name,
+                place_id: place.place_id,
+                photo_urls: place.photos.map((photo)=> [photo.width, photo.height, photo.getUrl()])
             }
             
             setCommunityHousingDetails(updatedCommunityHousingDetails);

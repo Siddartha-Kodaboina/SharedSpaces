@@ -95,7 +95,7 @@ const CreateVacancyFlow = () => {
                 ...formContent,
                 user: currentUser
             };
-            console.log(body);
+            console.log("Body: ", body);
 
             const response = await fetch(`${process.env.REACT_APP_NODE_HOST_URL}:${process.env.REACT_APP_NODE_HOST_PORT}/api/vacancy-request`, {
                 method: 'POST',
