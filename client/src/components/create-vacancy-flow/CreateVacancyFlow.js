@@ -8,7 +8,7 @@ import useFirebaseUser from '../../hooks/useFirebaseUser';
 
 const CreateVacancyFlow = () => {
     const currentUser = useFirebaseUser();
-    const [pageNumber, setPageNumber] = useState(5);
+    const [pageNumber, setPageNumber] = useState(1);
     const totalPages = 5;
     const [formContent, setFormContent] = useState({
         'universityDetails': {},
