@@ -1,12 +1,66 @@
 const pool = require('../db');
-const DatabaseUtils = require('../utils/database-utils')
+const DatabaseUtils = require('../utils/database-utils');
+const communitySchema = require('../schema/community');
 
 // Static variables
 tableName = 'community'
 const dbUtils = new DatabaseUtils(tableName);
 
-const createCommunity = async (req, res) => {
+const getCommunity = async (communityDetails) => {
+    let queryText = 'SELECT * from "community" WHERE place_id=$1';
+    console.log(communityDetails.place_id );
     try {
+        const res = await pool.query(queryText, [communityDetails.place_id]);
+        if(res.rows.length>0){
+            return res.rows[0];
+        }else{
+            return null;
+        }
+    }
+     catch (err) {
+        throw new Error(`An error occurred while creating the community: ${err.message}`);
+    }
+};
+
+const createCommunity = async (communityDetails) => {
+    try {
+        const community = await getCommunity(communityDetails);
+        if(community!==null){
+            return {
+                community: community
+            };
+        }
+
+        let tableColumnNames = [];
+        let values = [];
+        for (const key in communityDetails){
+            let value = communityDetails[key];
+            console.log(key, value);
+            if (value==0 || value=="" || value==[]) continue;
+            tableColumnNames.push(communitySchema[key]);
+            if(key=="photo_urls"){
+                photo_url_string = value.map((arr)=> arr.join(", ")).join(";");
+                values.push(photo_url_string);
+            }else{
+                values.push(value);
+            }
+        }
+
+        const tableColumnPlaceHolders = tableColumnNames.map((_, index) => `$${index + 1}`).join(', ');
+
+        const insertQuery = `INSERT INTO community (${tableColumnNames}) VALUES (${tableColumnPlaceHolders}) RETURNING *`;
+
+        const result = await pool.query(insertQuery, values);
+        return {
+            community: result.rows[0]
+        };
+    } catch (err) {
+        throw new Error(`An error occurred while creating the community: ${err.message}`);
+    }
+};
+const createCommunity1 = async (req, res) => {
+    try {
+
         const columns = await dbUtils.fetchAllColumns();
         const validColumns = columns.filter(column => req.body.hasOwnProperty(column));
 
@@ -109,6 +163,7 @@ const updateCommunity = async (req, res) => {
 
 module.exports = {
     createCommunity,
+    createCommunity1,
     readCommunityByID,
     readCommunity,
     updateCommunity
